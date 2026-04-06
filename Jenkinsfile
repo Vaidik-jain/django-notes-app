@@ -1,41 +1,29 @@
+@Library('Shared')_
 pipeline{
-    agent {label "vaidik"}
+    agent { label 'dev-server'}
+    
     stages{
-        stage("clone"){
+        stage("Code clone"){
             steps{
-                echo "clone"
-                git url :"https://github.com/Vaidik-jain/django-notes-app.git",branch :"main"
+                sh "whoami"
+            clone("https://github.com/LondheShubham153/django-notes-app.git","main")
             }
         }
-        stage("build"){
+        stage("Code Build"){
             steps{
-                echo "build"
-                sh "docker build -t notes-app:latest ."
+            dockerbuild("notes-app","latest")
             }
         }
-        stage("test"){
+        stage("Push to DockerHub"){
             steps{
-                echo "test"
+                dockerpush("dockerHubCreds","notes-app","latest")
             }
         }
-        stage("push to docker hub"){
+        stage("Deploy"){
             steps{
-                withCredentials([usernamePassword(
-                    credentialsId:"DockerHubCred",
-                    passwordVariable :"dockerHubPass",
-                    usernameVariable:"dockerHubUser"
-                    )]){
-                        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                        sh "docker image tag notes-app ${env.dockerHubUser}/notes-app"
-                        sh "docker push ${env.dockerHubUser}/notes-app:latest"
-                    }
+                deploy()
             }
         }
-        stage("deploy"){
-            steps{
-                echo "deploy"
-                sh "docker-compose up -d"
-            }
-        }
+        
     }
 }
