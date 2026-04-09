@@ -1,30 +1,41 @@
-# Simple Notes App for TWS Community
+# 🚀 Django Notes App with CI/CD Pipeline
 This is a simple notes app built with React and Django.
+
+## 📌 Project Overview
+This project is a Django-based Notes Application integrated with a complete CI/CD pipeline using Jenkins and Docker. The pipeline automates the process of building, testing, containerizing, and deploying the application on an AWS EC2 instance.
 
 ## Requirements
 1. Python 3.9
 2. Node.js
 3. React
 
-## Installation
-1. Clone the repository
-```
-git clone https://github.com/LondheShubham153/django-notes-app.git
-```
+## 🏗️ Architecture
+Developer → GitHub → Jenkins Pipeline → Docker Build → DockerHub → AWS EC2 Deployment
 
-2. Build the app
-```
-docker build -t notes-app .
-```
+## ⚙️ Tech Stack
 
-3. Run the app
-```
-docker run -d -p 8000:8000 notes-app:latest
-```
+- Backend: Django (Python)
+- CI/CD: Jenkins (Pipeline as Code)
+- Containerization: Docker, Docker Compose
+- Cloud: AWS EC2
+- Version Control: Git & GitHub
+- OS: Linux (Ubuntu)
 
-## Nginx
+## 📂 Important Files
 
-Install Nginx reverse proxy to make this application available
+- Jenkinsfile → Defines CI/CD pipeline stages
+- Dockerfile → Builds application image
+- docker-compose.yml → Manages multi-container setup
+- requirements.txt → Python dependencies
 
-`sudo apt-get update`
-`sudo apt install nginx`
+## 🔐 Features
+
+- Automated CI/CD pipeline
+- Dockerized Django application
+- Cloud deployment on AWS EC2
+- Scalable and production-ready structure
+## 🚀 Future Improvements
+
+- Add automated testing stage
+- Implement Kubernetes deployment
+- Add monitoring (Prometheus + Grafana)
